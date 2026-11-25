@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Size Curve Radar — token launch radar</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="eyebrow">TOKEN-RADAR-01 · PRE-TOKEN LAUNCH RADAR · SNAPSHOT <span id="asof"></span></div>
+  <h1 id="title">Size Curve Radar</h1>
+  <p class="lede" id="modelLine"></p>
+  <p class="lede small">Implied value is this radar's own claim: what a protocol's token would be worth if its record stayed as it is. It is not a prediction that a token will launch, or when.</p>
+</header>
+
+<section class="kpis" id="kpis" aria-label="Key figures"></section>
+
+<section class="panel" id="validation">
+  <h2>Why the curve, not a flat multiple</h2>
+  <p class="note">A flat multiple forces log(mcap) to grow 1-for-1 with log(TVL). The fitted slope is far from 1, so big protocols carry lower multiples and small ones higher. The curve is kept because it <strong>beats the flat multiple out of sample</strong> — on both blind tests below. Absolute hit rates are low for every model here (TVL alone explains only part of value); what matters is the edge over the baseline, shown as a multiplier.</p>
+  <div class="tables">
+    <div>
+      <h3>Blind test 1 — walk-forward</h3>
+      <p class="note small" id="wfNote"></p>
+      <table id="wfTable">
+        <thead><tr><th>Model</th><th>Hit ≤2×</th><th>Median |log err|</th><th>Median |err|</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p class="edge" id="wfEdge"></p>
+    </div>
+    <div>
+      <h3>Blind test 2 — leave-one-out</h3>
+      <p class="note small" id="looNote"></p>
+      <table id="looTable">
+        <thead><tr><th>Model</th><th>Hit ≤2×</th><th>Median |log err|</th><th>Median |err|</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p class="edge" id="looEdge"></p>
+    </div>
+  </div>
+  <h3>Every value term, kept or dropped on two blind tests</h3>
+  <p class="note small">A term is kept only when it beats the pure curve on hit rate <em>and</em> median log error in <em>both</em> tests. One failed comparison drops it.</p>
+  <table id="termTable">
+    <thead><tr><th>Term</th><th>Walk-forward hit / log err</th><th>Leave-one-out hit / log err</th><th>Decision</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <h3>Token odds from the peers' record</h3>
+  <p class="note small">Among protocols first tracked in the same age band, what share records a token today. Older cohorts record tokens more often — the rate is a peer calibration, not a promise for any one protocol.</p>
+  <table id="cohortTable">
+    <thead><tr><th>Age band</th><th>Protocols</th><th>With token</th><th>Peer launch rate</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <p class="note small" id="rangeNote"></p>
+</section>
+
+<section class="controls">
+  <div class="tabs" role="tablist">
+    <button id="tabPre" class="tab active" role="tab">Pre-token board</button>
+    <button id="tabLive" class="tab" role="tab">Live anchors</button>
+  </div>
+  <input id="search" type="search" placeholder="Search name or slug…" aria-label="Search">
+  <select id="chainFilter" aria-label="Filter by chain"><option value="">All chains</option></select>
+  <select id="sortBy" aria-label="Sort by">
+    <option value="implied">Sort: implied value ↓</option>
+    <option value="tvl">Sort: TVL ↓</option>
+    <option value="name">Sort: name A–Z</option>
+    <option value="verdict">Sort: farm $/hour ↓</option>
+  </select>
+</section>
+
+<main>
+  <div id="detail" class="detail hidden" aria-live="polite"></div>
+  <table id="boardTable">
+    <thead><tr id="boardHead"></tr></thead>
+    <tbody id="boardBody"></tbody>
+  </table>
+  <p class="note small" id="boardCount"></p>
+</main>
+
+<footer>
+  <p class="note small">Method: pooled OLS log(mcap) = a + b·log(TVL) on the token protocols in the sealed snapshot; every extra term tested held-out twice and dropped unless it wins both tests. Farm plans are costed for a $5,000 deposit over 30 days: bridge + gas + 0.30% DEX fee + slippage + exit, against an expected farmer reward of 5% of implied value shared pro-rata by TVL. Rank range: lowest–highest rank across 200 bootstrap refits of the curve. Coverage: every watchlist protocol is on the board; all 758 snapshot protocols are accounted for (live anchors on the second tab).</p>
+</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

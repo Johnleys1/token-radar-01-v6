@@ -1,0 +1,58 @@
+:root {
+  --bg: #0d1117; --panel: #161b22; --panel2: #1c2330; --line: #2d3748;
+  --text: #e6edf3; --muted: #9aa7b8; --accent: #58a6ff; --good: #3fb950;
+  --warn: #d29922; --bad: #f85149; --chip: #21262d;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.top { padding: 28px 28px 8px; max-width: 1180px; margin: 0 auto; }
+.eyebrow { color: var(--accent); font-size: 12px; letter-spacing: .12em; font-weight: 700; }
+h1 { font-size: 30px; margin: 8px 0 4px; }
+h2 { font-size: 20px; margin: 0 0 8px; }
+h3 { font-size: 15px; margin: 18px 0 6px; }
+.lede { color: var(--muted); margin: 4px 0; max-width: 900px; }
+.lede.small, .note.small { font-size: 13px; }
+.note { color: var(--muted); margin: 6px 0; }
+.kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; max-width: 1180px; margin: 18px auto; padding: 0 28px; }
+.kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.kpi .k { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.kpi .v { font-size: 24px; font-weight: 700; margin-top: 4px; }
+.kpi .s { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.panel { max-width: 1180px; margin: 10px auto; padding: 20px 28px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+.tables { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.edge { font-weight: 700; color: var(--good); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+tbody tr { cursor: pointer; }
+tbody tr:hover { background: var(--panel2); }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.badge { display: inline-block; padding: 1px 8px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.badge.keep { background: #12351f; color: var(--good); }
+.badge.drop { background: #3d1a1a; color: var(--bad); }
+.badge.watch { background: #2b2305; color: var(--warn); }
+.controls { max-width: 1180px; margin: 18px auto 0; padding: 0 28px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.tabs { display: flex; gap: 6px; }
+.tab { background: var(--chip); color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; cursor: pointer; font-weight: 600; }
+.tab.active { background: var(--accent); color: #06121f; border-color: var(--accent); }
+input[type="search"], select { background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font: inherit; }
+input[type="search"] { flex: 1; min-width: 200px; }
+main { max-width: 1180px; margin: 12px auto; padding: 0 28px 20px; }
+.detail { background: var(--panel2); border: 1px solid var(--accent); border-radius: 12px; padding: 18px 22px; margin-bottom: 16px; }
+.detail h2 { margin-bottom: 2px; }
+.detail .meta { color: var(--muted); font-size: 13px; margin: 2px 0 10px; }
+.detail ol { margin: 8px 0; padding-left: 22px; }
+.detail li { margin: 8px 0; }
+.costgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0; }
+.cost { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.cost .k { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.cost .v { font-size: 17px; font-weight: 700; margin-top: 2px; }
+.verdict { font-weight: 700; padding: 10px 12px; border-radius: 8px; }
+.verdict.pos { background: #12351f; color: var(--good); }
+.verdict.neg { background: #3d1a1a; color: var(--bad); }
+.hidden { display: none; }
+/* Compact view for screenshots: the board, detail or filtered table at the top. */
+body.shot-compact .kpis, body.shot-compact #validation { display: none; }
+footer { max-width: 1180px; margin: 0 auto; padding: 0 28px 28px; }
+.pos { color: var(--good); } .neg { color: var(--bad); }
+@media (max-width: 900px) { .kpis { grid-template-columns: repeat(2, 1fr); } .tables { grid-template-columns: 1fr; } .costgrid { grid-template-columns: repeat(2, 1fr); } }
